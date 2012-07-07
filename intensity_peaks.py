@@ -6,10 +6,9 @@ import numpy as np
 import os
 
 for files in os.listdir("."):
-    if files.endswith(".wav")
-        song = files
-        song_name_split = song.split(".")
-        song_name_file = song_name_split[0] + ".wav"
+    if (not files.startswith(".")) and files.endswith(".wav"):
+        song_name_split = files.split(".")
+        song_name_file = str(song_name_split[0]) + ".wav"
 
         # OPEN FILE #
         spf = wave.open(song_name_file,'r')
@@ -61,16 +60,21 @@ for files in os.listdir("."):
             spectrogram.append( ft_half) 
             last_idx = ceil(last_idx + num_samples_per_window - num_samples_per_overlap)
                 
-    spec_peaks = []
+        spec_peaks = []
 
-    f = open( song_name_split[0] + ".txt",'w')
+        f = open( song_name_split[0] + ".txt",'w')
 
-    # find highest peaks in song 
-    for freq_array in spectrogram : 
-        max_peak = max( freq_array )
-        spec_peaks.append( max_peak )
+        # find highest peaks in song 
+        for freq_array in spectrogram : 
+            max_peak = max( freq_array )
+            spec_peaks.append( max_peak )
         
-    f.write( str(spec_peaks) )  
+        f.write( str(spec_peaks) )  
+
+
+
+
+
 
 
 '''
